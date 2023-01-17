@@ -5,9 +5,11 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,23 +31,23 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
-    FirebaseFirestore db;
+    FirebaseFirestore dataBase;
     String emailUsuario;
 
-    ListView listViewTareas;
-    List<String> listaTareas = new ArrayList<>();
-    List<String> listaIdTareas = new ArrayList<>();
-    ArrayAdapter<String> mAdapterTareas;
+    ListView listViewTasks;
+    List<String> taskList = new ArrayList<>();
+    List<String> taskListId = new ArrayList<>();
+    ArrayAdapter<String> mAdapterTasks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        db = FirebaseFirestore.getInstance();
+        dataBase = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         emailUsuario = mAuth.getCurrentUser().getEmail();
-        listViewTareas = findViewById(R.id.listaVistas);
+        listViewTasks = findViewById(R.id.listaVistas);
 
         //actualizar la UI con las tareas del usuario logueado
         actualizarUI();
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void actualizarUI(){
-        db.collection("Tareas")
+        dataBase.collection("Tareas")
                 .whereEqualTo("emailUsuario", emailUsuario)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
@@ -64,19 +66,19 @@ public class MainActivity extends AppCompatActivity {
                             return;
                         }
 
-                        listaTareas.clear();
-                        listaIdTareas.clear();
+                        taskList.clear();
+                        taskListId.clear();
 
                         for (QueryDocumentSnapshot doc : value) {
-                            listaIdTareas.add(doc.getId());
-                            listaTareas.add(doc.getString("nombreTarea"));
+                            taskListId.add(doc.getId());
+                            taskList.add(doc.getString("nombreTarea"));
                         }
 
-                        if(listaTareas.size()== 0){
-                            listViewTareas.setAdapter(null);
+                        if(taskList.size()== 0){
+                            listViewTasks.setAdapter(null);
                         }else{
-                            mAdapterTareas = new ArrayAdapter<>(MainActivity.this, R.layout.item_tarea, R.id.nombreTarea, listaTareas);
-                            listViewTareas.setAdapter(mAdapterTareas);
+                            mAdapterTasks = new ArrayAdapter<>(MainActivity.this, R.layout.item_task, R.id.nombreTarea, taskList);
+                            listViewTasks.setAdapter(mAdapterTasks);
                         }
                     }
                 });
@@ -92,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
-            case R.id.mas:
+            case R.id.addTask:
                 //activar el cuadro de dialogo para añadir tarea
                 final EditText taskEditText = new EditText(this);
                 AlertDialog dialog = new AlertDialog.Builder(this)
@@ -110,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                                 tarea.put("nombreTarea", miTarea);
                                 tarea.put("emailUsuario", emailUsuario);
 
-                                db.collection("Tareas").add(tarea);
+                                dataBase.collection("Tareas").add(tarea);
                             }
                         })
                         .setNegativeButton("Cancelar", null)
@@ -127,5 +129,14 @@ public class MainActivity extends AppCompatActivity {
             default: return super.onOptionsItemSelected(item);
         }
 
+    }
+
+    public void taskDelete(View view){
+        View parent = (View) view.getParent();
+        TextView textViewTask = parent.findViewById(R.id.nombreTarea);
+        String task = textViewTask.getText().toString();
+        int position = taskList.indexOf(task);
+
+        dataBase.collection("Tareas").document(taskListId.get(position)).delete();
     }
 }
