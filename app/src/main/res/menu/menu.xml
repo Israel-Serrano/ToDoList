@@ -5,14 +5,13 @@
     tools:context=".MainActivity">
     <item
         android:id="@+id/addTask"
+        android:icon="@mipmap/list"
         android:title="@string/mas"
-        android:icon="@mipmap/mas"
-        app:showAsAction="always"
-        />
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/logout"
-        android:icon="@mipmap/logout"
+        android:icon="@mipmap/off"
         android:title="@string/logout"
         app:showAsAction="always" />
 </menu>
