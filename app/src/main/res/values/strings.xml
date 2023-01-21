@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ToDoList</string>
+    <string name="app_name">CuteTasks</string>
     <string name="hintCorreo">email</string>
     <string name="hintPass">password</string>
     <string name="login">Login</string>
@@ -9,4 +9,5 @@
     <string name="mas">Mas</string>
     <string name="done">Done</string>
     <string name="tarea">Tarea</string>
+    <string name="cute_tasks">CuteTasks</string>
 </resources>

@@ -11,10 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
-        android:fontFamily="@font/fuente"
-        android:text="@string/mis_tareas"
+        android:fontFamily="@font/cute_notes"
+        android:text="@string/cute_tasks"
         android:textColor="#FF6200EE"
-        android:textSize="50sp"
+        android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
