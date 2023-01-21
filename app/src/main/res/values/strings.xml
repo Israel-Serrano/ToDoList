@@ -10,4 +10,8 @@
     <string name="done">Done</string>
     <string name="tarea">Tarea</string>
     <string name="cute_tasks">CuteTasks</string>
+    <string name="todo">TODO</string>
+    <string name="te">te</string>
+    <string name="tasks">Tasks</string>
+    <string name="cu">Cu</string>
 </resources>
