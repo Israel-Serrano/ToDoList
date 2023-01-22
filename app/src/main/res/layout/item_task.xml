@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="52dp"
         android:fontFamily="@font/made_tommy"
         android:text="@string/tarea"
         android:textSize="20sp"
@@ -20,14 +20,29 @@
 
     <Button
         android:id="@+id/done"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="121dp"
+        android:layout_height="48dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
+        android:drawableLeft="@mipmap/verify"
         android:fontFamily="@font/made_tommy_medium"
         android:onClick="taskDelete"
         android:text="@string/done"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/modify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:drawableLeft="@mipmap/pencil"
+        android:fontFamily="@font/made_tommy_medium"
+        android:onClick="taskModify"
+        android:text="@string/modify"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/done" />
 </androidx.constraintlayout.widget.ConstraintLayout>
