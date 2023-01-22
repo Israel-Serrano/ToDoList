@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                 final EditText taskEditText = new EditText(this);
                 AlertDialog dialog = new AlertDialog.Builder(this)
                         .setTitle("Nueva tarea")
-                        .setMessage("¿Qué quieres hacer a continuación")
+                        .setMessage("¿Qué quieres hacer a continuación?")
                         .setView(taskEditText)
                         .setPositiveButton("Añadir", new DialogInterface.OnClickListener() {
                             @Override
@@ -142,5 +142,41 @@ public class MainActivity extends AppCompatActivity {
 
         Toast.makeText(MainActivity.this, "Tarea realizada.",
                 Toast.LENGTH_SHORT).show();
+    }
+
+    public void taskModify(View view){
+        View parent = (View) view.getParent();
+        TextView textViewTask = parent.findViewById(R.id.nombreTarea);
+        String task = textViewTask.getText().toString();
+
+        final EditText taskEditText = new EditText(this);
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Modificar tarea")
+                .setMessage("Cambiar \"" + task + "\" por: ")
+                .setView(taskEditText)
+                .setPositiveButton("Modificar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //añadir tarea a la BDD
+
+                        String miTarea = taskEditText.getText().toString();
+
+                        Map<String, Object> tarea = new HashMap<>();
+                        tarea.put("nombreTarea", miTarea);
+                        tarea.put("emailUsuario", emailUsuario);
+
+                        int position = taskList.indexOf(task);
+
+                        dataBase.collection("Tareas").document(taskListId.get(position)).update(tarea);
+
+                        Toast.makeText(MainActivity.this, "Tarea modificada", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("Cancelar", null)
+                .create();
+        dialog.show();
+
+
+
     }
 }
