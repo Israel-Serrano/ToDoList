@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -138,5 +139,8 @@ public class MainActivity extends AppCompatActivity {
         int position = taskList.indexOf(task);
 
         dataBase.collection("Tareas").document(taskListId.get(position)).delete();
+
+        Toast.makeText(MainActivity.this, "Tarea realizada.",
+                Toast.LENGTH_SHORT).show();
     }
 }
