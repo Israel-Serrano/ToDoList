@@ -149,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
         TextView textViewTask = parent.findViewById(R.id.nombreTarea);
         String task = textViewTask.getText().toString();
 
+        //final EditText taskEditText = (EditText) textViewTask.getText();
         final EditText taskEditText = new EditText(this);
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("Modificar tarea")

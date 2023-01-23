@@ -37,19 +37,27 @@ public class Login extends AppCompatActivity {
             //LOGIN EN FIREBASE
             String email = emailText.getText().toString();
             String password = passText.getText().toString();
-            mAuth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, task -> {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Intent intent = new Intent(Login.this, MainActivity.class);
-                            startActivity(intent);
-                        } else {
-                            // If sign in fails, display a message to the user.
 
-                            Toast.makeText(Login.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    });
+            if(email.isEmpty()){
+                emailText.setError("Campo vacío");
+            }else if(password.isEmpty()) {
+                passText.setError("Campo vacío");
+            }else {
+
+                mAuth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(this, task -> {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Intent intent = new Intent(Login.this, MainActivity.class);
+                                startActivity(intent);
+                            } else {
+                                // If sign in fails, display a message to the user.
+
+                                Toast.makeText(Login.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
 
         });
 
@@ -59,21 +67,29 @@ public class Login extends AppCompatActivity {
             String email = emailText.getText().toString();
             String password = passText.getText().toString();
 
-            mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(Login.this, "Usuario registrado", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(Login.this, MainActivity.class);
-                            startActivity(intent);
+            if(email.isEmpty()){
+                emailText.setError("Campo vacío");
+            }else if(password.isEmpty()) {
+                passText.setError("Campo vacío");
+            }else {
 
-                        } else {
-                            // If sign in fails, display a message to the user.
+                mAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Toast.makeText(Login.this, "Usuario registrado", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(Login.this, MainActivity.class);
+                                startActivity(intent);
 
-                            Toast.makeText(Login.this, "User creation failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                            } else {
+                                // If sign in fails, display a message to the user.
+
+                                Toast.makeText(Login.this, "User creation failed.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
         });
+
     }
 }
