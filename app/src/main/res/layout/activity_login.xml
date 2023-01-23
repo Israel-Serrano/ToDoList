@@ -32,11 +32,11 @@
             android:id="@+id/cajaCorreo"
             android:layout_width="314dp"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/made_tommy_medium"
             android:hint="@string/hintCorreo"
             android:textColorHint="@color/purple_200"
-            android:textSize="16sp"
-            android:backgroundTint="@color/white"
-            />
+            android:textSize="16sp" />
         <requestFocus/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -54,6 +54,7 @@
             android:layout_width="314dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
+            android:fontFamily="@font/made_tommy_medium"
             android:hint="@string/hintPass"
             android:inputType="textPassword"
             android:textColorHint="@color/purple_200"
@@ -67,6 +68,7 @@
         android:layout_height="52dp"
         android:layout_marginTop="72dp"
         android:backgroundTint="@color/purple_500"
+        android:fontFamily="@font/made_tommy_medium"
         android:text="@string/login"
         android:textSize="16sp"
         app:cornerRadius="32sp"
@@ -79,6 +81,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:fontFamily="@font/made_tommy"
         android:text="@string/crea_una_cuenta"
         android:textColor="@color/purple_500"
         android:textSize="20sp"
