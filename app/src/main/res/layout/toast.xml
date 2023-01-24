@@ -11,13 +11,14 @@
     <ImageView android:id="@+id/imgIcono"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:src="@mipmap/toaster32" />
+        android:src="@mipmap/toaster32"
+        android:contentDescription="TODO" />
 
     <TextView android:id="@+id/txtMensaje"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:textColor="#FFFFFF"
-        android:paddingLeft="10dip" />
+        android:paddingStart="10dip" />
 
 </LinearLayout>
