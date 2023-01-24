@@ -26,7 +26,8 @@
         android:layout_marginTop="72dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nombreApp">
+        app:layout_constraintTop_toBottomOf="@+id/nombreApp"
+        app:startIconDrawable="@drawable/ic_baseline_email_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/cajaCorreo"
@@ -36,7 +37,7 @@
             android:fontFamily="@font/made_tommy_medium"
             android:hint="@string/hintCorreo"
             android:textColorHint="@color/purple_200"
-            android:textSize="16sp" />
+            android:textSize="16sp"/>
         <requestFocus/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -47,7 +48,9 @@
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutCorreo">
+        app:layout_constraintTop_toBottomOf="@+id/layoutCorreo"
+        app:endIconMode= "password_toggle"
+        app:startIconDrawable="@drawable/ic_baseline_lock_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/cajaPass"

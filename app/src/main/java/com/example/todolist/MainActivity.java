@@ -3,9 +3,11 @@ package com.example.todolist;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -140,8 +142,15 @@ public class MainActivity extends AppCompatActivity {
 
         dataBase.collection("Tareas").document(taskListId.get(position)).delete();
 
-        Toast.makeText(MainActivity.this, "Tarea realizada.",
-                Toast.LENGTH_SHORT).show();
+        Toast toast = new Toast(getApplicationContext());
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.toast,
+                (ViewGroup) findViewById(R.id.lytLayout));
+        TextView txtMsg = (TextView)layout.findViewById(R.id.txtMensaje);
+        txtMsg.setText("Tarea realizada");
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
     }
 
     public void taskModify(View view){
@@ -149,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
         TextView textViewTask = parent.findViewById(R.id.nombreTarea);
         String task = textViewTask.getText().toString();
 
-        //final EditText taskEditText = (EditText) textViewTask.getText();
+        //final EditText taskEditText = new EditText(this, task.getData());
         final EditText taskEditText = new EditText(this);
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("Modificar tarea")
@@ -158,19 +167,22 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton("Modificar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        //añadir tarea a la BDD
+                        //modificar tarea en la BDD
 
                         String miTarea = taskEditText.getText().toString();
-
-                        Map<String, Object> tarea = new HashMap<>();
-                        tarea.put("nombreTarea", miTarea);
-                        tarea.put("emailUsuario", emailUsuario);
-
                         int position = taskList.indexOf(task);
 
-                        dataBase.collection("Tareas").document(taskListId.get(position)).update(tarea);
+                        dataBase.collection("Tareas").document(taskListId.get(position)).update("nombreTarea", miTarea);
 
-                        Toast.makeText(MainActivity.this, "Tarea modificada", Toast.LENGTH_SHORT).show();
+                        Toast toast = new Toast(getApplicationContext());
+                        LayoutInflater inflater = getLayoutInflater();
+                        View layout = inflater.inflate(R.layout.toast,
+                                (ViewGroup) findViewById(R.id.lytLayout));
+                        TextView txtMsg = (TextView)layout.findViewById(R.id.txtMensaje);
+                        txtMsg.setText("Tarea modificada");
+                        toast.setDuration(Toast.LENGTH_SHORT);
+                        toast.setView(layout);
+                        toast.show();
                     }
                 })
                 .setNegativeButton("Cancelar", null)
