@@ -1,5 +1,6 @@
 package com.example.todolist;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ public class Login extends AppCompatActivity {
     TextView botonRegistro;
     EditText emailText, passText;
     private FirebaseAuth mAuth;
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +45,9 @@ public class Login extends AppCompatActivity {
 
             if(email.isEmpty()){
                 emailText.setError("Campo vacío");
-            }else if(password.isEmpty()) {
+            }else if(!email.contains("@") && !email.contains(".") && !email.contains(" ")){
+                    emailText.setError("Email no válido");
+            }else if(password.isEmpty()){
                 passText.setError("Campo vacío");
             }else {
 
@@ -79,7 +83,9 @@ public class Login extends AppCompatActivity {
 
             if(email.isEmpty()){
                 emailText.setError("Campo vacío");
-            }else if(password.isEmpty()) {
+            }else if(!email.contains("@") && !email.contains(".") && !email.contains(" ")){
+                emailText.setError("Email no válido");
+            }else if(password.isEmpty()){
                 passText.setError("Campo vacío");
             }else if(password.length() < 6){
                 passText.setError("Contraseña inferior a 6 caracteres");

@@ -134,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("SetTextI18n")
     public void taskDelete(View view){
         View parent = (View) view.getParent();
         TextView textViewTask = parent.findViewById(R.id.nombreTarea);
@@ -165,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
                 .setMessage("Cambiar \"" + task + "\" por: ")
                 .setView(taskEditText)
                 .setPositiveButton("Modificar", new DialogInterface.OnClickListener() {
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //modificar tarea en la BDD
