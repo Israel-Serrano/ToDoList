@@ -2,6 +2,9 @@ package com.example.todolist;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -53,8 +56,15 @@ public class Login extends AppCompatActivity {
                             } else {
                                 // If sign in fails, display a message to the user.
 
-                                Toast.makeText(Login.this, "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
+                                Toast toast = new Toast(getApplicationContext());
+                                LayoutInflater inflater = getLayoutInflater();
+                                View layout = inflater.inflate(R.layout.toast,
+                                        (ViewGroup) findViewById(R.id.lytLayout));
+                                TextView txtMsg = (TextView)layout.findViewById(R.id.txtMensaje);
+                                txtMsg.setText("Fallo de autenticación.");
+                                toast.setDuration(Toast.LENGTH_SHORT);
+                                toast.setView(layout);
+                                toast.show();
                             }
                         });
             }
@@ -71,21 +81,40 @@ public class Login extends AppCompatActivity {
                 emailText.setError("Campo vacío");
             }else if(password.isEmpty()) {
                 passText.setError("Campo vacío");
+            }else if(password.length() < 6){
+                passText.setError("Contraseña inferior a 6 caracteres");
             }else {
 
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
-                                Toast.makeText(Login.this, "Usuario registrado", Toast.LENGTH_LONG).show();
+                                Toast toast = new Toast(getApplicationContext());
+                                LayoutInflater inflater = getLayoutInflater();
+                                View layout = inflater.inflate(R.layout.toast,
+                                        (ViewGroup) findViewById(R.id.lytLayout));
+                                TextView txtMsg = (TextView)layout.findViewById(R.id.txtMensaje);
+                                txtMsg.setText("Usuario registrado correctamente.");
+                                toast.setDuration(Toast.LENGTH_SHORT);
+                                toast.setView(layout);
+                                toast.show();
                                 Intent intent = new Intent(Login.this, MainActivity.class);
                                 startActivity(intent);
 
                             } else {
                                 // If sign in fails, display a message to the user.
 
-                                Toast.makeText(Login.this, "User creation failed.",
-                                        Toast.LENGTH_SHORT).show();
+                                Toast toast = new Toast(getApplicationContext());
+                                LayoutInflater inflater = getLayoutInflater();
+                                View layout = inflater.inflate(R.layout.toast,
+                                        (ViewGroup) findViewById(R.id.lytLayout));
+                                TextView txtMsg = (TextView)layout.findViewById(R.id.txtMensaje);
+                                txtMsg.setText("Fallo al registrar usuario.");
+                                toast.setDuration(Toast.LENGTH_SHORT);
+                                toast.setView(layout);
+                                toast.show();
+                                Intent intent = new Intent(Login.this, MainActivity.class);
+                                startActivity(intent);
                             }
                         });
             }
