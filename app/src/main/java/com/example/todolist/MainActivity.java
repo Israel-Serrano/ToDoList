@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -93,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    @SuppressLint("NonConstantResourceId")
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
@@ -134,7 +133,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @SuppressLint("SetTextI18n")
     public void taskDelete(View view){
         View parent = (View) view.getParent();
         TextView textViewTask = parent.findViewById(R.id.nombreTarea);
@@ -146,9 +144,9 @@ public class MainActivity extends AppCompatActivity {
         Toast toast = new Toast(getApplicationContext());
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.toast,
-                (ViewGroup) findViewById(R.id.lytLayout));
-        TextView txtMsg = (TextView)layout.findViewById(R.id.txtMensaje);
-        txtMsg.setText("Tarea realizada");
+                findViewById(R.id.lytLayout));
+        TextView txtMsg = layout.findViewById(R.id.txtMensaje);
+        txtMsg.setText(R.string.task_ok);
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.setView(layout);
         toast.show();
@@ -159,14 +157,14 @@ public class MainActivity extends AppCompatActivity {
         TextView textViewTask = parent.findViewById(R.id.nombreTarea);
         String task = textViewTask.getText().toString();
 
-        //final EditText taskEditText = new EditText(this, task.getData());
+        //final EditText taskEditText = (EditText) textViewTask.getEditableText();
         final EditText taskEditText = new EditText(this);
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("Modificar tarea")
                 .setMessage("Cambiar \"" + task + "\" por: ")
                 .setView(taskEditText)
                 .setPositiveButton("Modificar", new DialogInterface.OnClickListener() {
-                    @SuppressLint("SetTextI18n")
+
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //modificar tarea en la BDD
@@ -179,9 +177,9 @@ public class MainActivity extends AppCompatActivity {
                         Toast toast = new Toast(getApplicationContext());
                         LayoutInflater inflater = getLayoutInflater();
                         View layout = inflater.inflate(R.layout.toast,
-                                (ViewGroup) findViewById(R.id.lytLayout));
-                        TextView txtMsg = (TextView)layout.findViewById(R.id.txtMensaje);
-                        txtMsg.setText("Tarea modificada");
+                                findViewById(R.id.lytLayout));
+                        TextView txtMsg = layout.findViewById(R.id.txtMensaje);
+                        txtMsg.setText(R.string.modify_task);
                         toast.setDuration(Toast.LENGTH_SHORT);
                         toast.setView(layout);
                         toast.show();

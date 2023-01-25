@@ -23,7 +23,7 @@ public class Login extends AppCompatActivity {
     TextView botonRegistro;
     EditText emailText, passText;
     private FirebaseAuth mAuth;
-    @SuppressLint("SetTextI18n")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +45,7 @@ public class Login extends AppCompatActivity {
 
             if(email.isEmpty()){
                 emailText.setError("Campo vacío");
-            }else if(!email.contains("@") && !email.contains(".") && !email.contains(" ")){
+            }else if(!email.contains("@") || !email.contains(".") || email.contains(" ")){
                     emailText.setError("Email no válido");
             }else if(password.isEmpty()){
                 passText.setError("Campo vacío");
@@ -65,7 +65,7 @@ public class Login extends AppCompatActivity {
                                 View layout = inflater.inflate(R.layout.toast,
                                         (ViewGroup) findViewById(R.id.lytLayout));
                                 TextView txtMsg = (TextView)layout.findViewById(R.id.txtMensaje);
-                                txtMsg.setText("Fallo de autenticación.");
+                                txtMsg.setText(R.string.auth_fail);
                                 toast.setDuration(Toast.LENGTH_SHORT);
                                 toast.setView(layout);
                                 toast.show();
@@ -83,7 +83,7 @@ public class Login extends AppCompatActivity {
 
             if(email.isEmpty()){
                 emailText.setError("Campo vacío");
-            }else if(!email.contains("@") && !email.contains(".") && !email.contains(" ")){
+            }else if(!email.contains("@") || !email.contains(".") || email.contains(" ")){
                 emailText.setError("Email no válido");
             }else if(password.isEmpty()){
                 passText.setError("Campo vacío");
@@ -100,7 +100,7 @@ public class Login extends AppCompatActivity {
                                 View layout = inflater.inflate(R.layout.toast,
                                         (ViewGroup) findViewById(R.id.lytLayout));
                                 TextView txtMsg = (TextView)layout.findViewById(R.id.txtMensaje);
-                                txtMsg.setText("Usuario registrado correctamente.");
+                                txtMsg.setText(R.string.register_ok);
                                 toast.setDuration(Toast.LENGTH_SHORT);
                                 toast.setView(layout);
                                 toast.show();
@@ -115,7 +115,7 @@ public class Login extends AppCompatActivity {
                                 View layout = inflater.inflate(R.layout.toast,
                                         (ViewGroup) findViewById(R.id.lytLayout));
                                 TextView txtMsg = (TextView)layout.findViewById(R.id.txtMensaje);
-                                txtMsg.setText("Fallo al registrar usuario.");
+                                txtMsg.setText(R.string.fail);
                                 toast.setDuration(Toast.LENGTH_SHORT);
                                 toast.setView(layout);
                                 toast.show();
