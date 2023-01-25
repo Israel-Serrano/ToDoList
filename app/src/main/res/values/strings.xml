@@ -16,4 +16,9 @@
     <string name="cu">Cu</string>
     <string name="modify">MODIFY</string>
     <string name="todo2">TODO</string>
+    <string name="fail">Fallo al registrar usuario.</string>
+    <string name="register_ok">Usuario registrado correctamente.</string>
+    <string name="auth_fail">Fallo de autenticación.</string>
+    <string name="modify_task">Tarea modificada</string>
+    <string name="task_ok">Tarea realizada</string>
 </resources>
